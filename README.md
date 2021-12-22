@@ -60,6 +60,7 @@ Example UI:
 ## Generating the Excel sheet
 
 `node src/generateExcel.js roundNumber`
+
 Example: `node src/generateExcel.js 12`
 
 This script will fetch the events for the specified round number from the contract and generate an Excel sheet named `Round-${roundNumber}-grants.xlsx` in the `outputs` directory.
