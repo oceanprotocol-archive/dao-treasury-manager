@@ -1,9 +1,9 @@
-# USER MANUAL
+# Guide
 
 ## Installation
 
-- `git clone thisrepo`
-- `cd thisrepo`
+- `git clone https://github.com/oceanprotocol/dao-treasury-manager.git`
+- `cd dao-treasury-manager`
 - `npm install`
 
 ## Setting up the env variables
@@ -20,6 +20,7 @@
 ## Generating signatures
 
 `node src/addSignatures.js roundNumber`
+
 Example: `node src/addSignatures.js 12`
 
 This script will generate signatures for each proposal in the round which doesn't have a signature yet and has a `Granted` status.
