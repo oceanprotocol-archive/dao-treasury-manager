@@ -14,13 +14,14 @@ function sign(grant) {
   }
 
   const message = ethers.utils.solidityKeccak256(
-    ["uint256", "address", "string", "uint256", "uint256"],
+    ["uint256", "address", "string", "uint256", "uint256", "address"],
     [
       grant.roundNumber,
       grant.recipient,
-      grant.projectName,
+      grant.proposalId,
       grant.timeStamp,
       grant.amount,
+      grant.tokenAddress,
     ]
   );
   const signedMessage = signMessage(message, verifierPK);
@@ -36,12 +37,15 @@ async function updateProposals(proposals) {
     grant.recipient = x.fields["Wallet Address"].trim();
     grant.proposalId = x.fields["RecordId"];
     grant.timeStamp = parseInt(Date.now() / 1000);
-    grant.amount = ethers.utils.parseEther(
-      x.fields["OCEAN Granted"].toString()
-    );
+    grant.amount = ethers.utils
+      .parseEther(x.fields["OCEAN Granted"].toString())
+      .toString();
+    grant.tokenAddress = process.env.OCEAN_TOKEN_ADDRESS;
     const signedMessage = sign(grant);
-    grant.signedMessage = signedMessage;
-    grant.amount = ethers.utils.formatEther(grant.amount);
+    const { v, r, s } = ethers.utils.splitSignature(signedMessage);
+    grant.v = v;
+    grant.r = r;
+    grant.s = s;
     promises.push(
       x.updateFields({
         "Signed Hash": Buffer.from(JSON.stringify(grant)).toString("base64"),
