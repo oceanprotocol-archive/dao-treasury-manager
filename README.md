@@ -26,9 +26,7 @@ Example: `node src/addSignatures.js 12`
 This script will generate signatures for each proposal in the round which doesn't have a signature yet and has a `Granted` status.
 Signatures are generated based on the recipient address, round number, record id, amount of Ocean tokens granted and the current timestamp in seconds.
 
-Removing a signature and running this script again would cause the signature to be regenerated. This must be **avoided**.
-
-The script will automatically fill in the `Signed Hash` field for each proposal. This field is the base64 encoding of a JSON string.
+The script will automatically fill in the `Signed Hash` field for each proposal. This field will contain the base64 encoding of the JSON string.
 
 Example:
 
