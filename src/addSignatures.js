@@ -48,7 +48,7 @@ async function updateProposals(proposals) {
     grant.s = s;
     promises.push(
       x.updateFields({
-        "Signed Hash": Buffer.from(JSON.stringify(grant)).toString("base64"),
+        "Reward String": Buffer.from(JSON.stringify(grant)).toString("base64"),
       })
     );
     grants.push(grant);
