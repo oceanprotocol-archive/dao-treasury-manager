@@ -4,7 +4,7 @@ const base = require("airtable").base(process.env.AIRTABLE_BASEID);
 
 const getProposals = async (round) => {
   const roundParameters = await getRoundsSelectQuery(
-    `AND({Proposal State} = "Granted", {Signed Hash} = "", {Round} = ${round})`
+    `AND({Proposal State} = "Granted", {Reward String} = "", {Round} = ${round})`
   );
   return roundParameters;
 };
